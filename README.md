@@ -33,3 +33,16 @@ ifpattern="PAN-1071-QCS_S1_L001_R*_001_*.fastq" - specifies the pattern of fastq
 targetgenomefiles=($(ls orggenomes/*.fa)) - specifies the path to the folder that has all desired genomes, in fasta format, to be used to make reads
 titerlvls="5 50" - a space seperated list of integers that correspond to how many reads are desired to be generated in the output fastqs 
 workdir=intermediatefile_titerlvls - the working directory where all intermediate files and the final files will be deposited
+
+# duplicatereadsinfastq.sh
+
+A script that dupicates the reads in a reference fastq by some number of times (to up-sample a fastq) and then trims the number of reads to a certain number of lines (to control the number of reads in a file) 
+
+The command to use is ./PATH/duplicatereadsinfastq.sh, where PATH is the location of makenakedreads.sh, and is run in the folder where you want the resulting fastq to be generated.
+
+List of parameters in the script:
+INITFILE="PAN-1071-QCS_S1_L001_R1_001_a.fastq" - specifies the file to be used for the up-sampling of reads
+NUMCOPIES=25 - number of times each of the reads will be copied in the outputfile before trimming
+TRIMNUMBER=30000000 - number of lines the resulting file should have at the end
+OUTFILE=${INITFILE%.*}_dup${NUMCOPIES}_trim${TRIMNUMBER}.fastq - filename (or path) for the resulting file
+
