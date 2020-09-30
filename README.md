@@ -21,3 +21,15 @@ R1length=75 - the actual sequence length of read 1
 R2length=75 - the actual sequence length of read 2
 maxNallowed=0 -  the number of nucleotide positions allowed to be generated with a completely ambiguous nucloetide (N) 
 numreads=1000000 -  the initial number of reads that the tool will generateas a batch, all the following fastqs will be a subset of these read and this number should be atleast as big as the largest number in "titerlvls" 
+
+# makespikeinfilesv1.sh
+
+A script that, provided dwgsim is installed, mostly automates the generation of reads (Illumina,etc.) and produces fastq with specified read counts and then spikes them into background reads at specified levels. 
+
+The command to use is ./PATH/makespikeinfilesv1.sh, where PATH is the location of makenakedreads.sh, and is run in the folder where you want the resulting reads to be generated and saved.
+
+List of parameters in the script:
+ifpattern="PAN-1071-QCS_S1_L001_R*_001_*.fastq" - specifies the pattern of fastqs you want to have generated reads spiked into, * being wildcards, to expand out to at least 2 files
+targetgenomefiles=($(ls orggenomes/*.fa)) - specifies the path to the folder that has all desired genomes, in fasta format, to be used to make reads
+titerlvls="5 50" - a space seperated list of integers that correspond to how many reads are desired to be generated in the output fastqs 
+workdir=intermediatefile_titerlvls - the working directory where all intermediate files and the final files will be deposited
